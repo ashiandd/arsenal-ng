@@ -1,0 +1,70 @@
+tool: smtp-user-enum
+tags: [network, security, pentest, enumeration, smtp, email, scanner]
+
+actions:
+  # === BASIC ENUMERATION ===
+  - title: smtp-user-enum - check single username
+    desc: |
+      Perform a basic check for a single username on a specific target host using the default VRFY method.
+      This is the quickest way to verify if a known account exists without triggering excessive noise from a wordlist.
+      Be aware that many modern SMTP servers disable the VRFY command by default to prevent this type of reconnaissance.
+      It returns a positive result if the server confirms the existence of the user.
+    command: "smtp-user-enum -u {{username}} -t {{target}}"
+
+  - title: smtp-user-enum - enumerate users from file
+    desc: |
+      Iterate through a list of potential usernames provided in a text file against a specific target host.
+      This action uses the default VRFY method to query the server about each entry in the provided wordlist.
+      It is a standard reconnaissance technique during penetration tests to identify valid system accounts or email addresses.
+      Ensure you use a relevant wordlist to increase the chances of finding valid users.
+    command: "smtp-user-enum -U {{user_file|/usr/share/wordlists/metasploit/unix_users.txt}} -t {{target}}"
+
+  # === METHOD-SPECIFIC ENUMERATION ===
+  - title: smtp-user-enum - enumerate using EXPN method
+    desc: |
+      Use the EXPN (Expand) SMTP command to identify the members of a mailing list or a single alias.
+      If the server supports EXPN, this method can reveal the actual system usernames associated with an alias or distribution group.
+      This command is often disabled on hardened servers because it discloses internal organizational structure.
+      It is particularly effective for uncovering administrative accounts hidden behind generic aliases.
+    command: "smtp-user-enum -M EXPN -U {{user_file}} -t {{target}}"
+
+  - title: smtp-user-enum - enumerate using RCPT TO method
+    desc: |
+      Utilize the RCPT TO method which is often available even when VRFY and EXPN are explicitly disabled.
+      This method mimics the start of a real email delivery process to see if the server accepts the recipient's address.
+      You may need to provide a sender address using the -f flag to bypass basic anti-spam filters that check for valid senders.
+      Note that this method can be more "noisy" in logs compared to VRFY or EXPN.
+    command: "smtp-user-enum -M RCPT -f {{from_address|admin@example.com}} -U {{user_file}} -t {{target}}"
+
+  # === ADVANCED SCENARIOS ===
+  - title: smtp-user-enum - enumerate full email addresses
+    desc: |
+      Append a specific domain to every username in the list to guess full email addresses instead of just local usernames.
+      This is highly useful when targeting mail servers that host multiple domains or require the full 'user@domain.com' format for validation.
+      It helps in mapping out the corporate email structure accurately for social engineering or further attacks.
+      Use this when the target service acts as a gateway for an entire organization.
+    command: "smtp-user-enum -D {{domain}} -U {{user_file}} -t {{target}}"
+
+  - title: smtp-user-enum - scan multiple targets simultaneously
+    desc: |
+      Provide a file containing multiple target IP addresses or hostnames to scan for the same user list.
+      The tool will cycle through each host in the target list, performing enumeration for every user in the username file.
+      This is an efficient way to scan entire network segments or mail clusters for common administrative accounts.
+      Be careful with the combination of large user lists and large target lists as it can take a significant amount of time.
+    command: "smtp-user-enum -U {{user_file}} -T {{target_list}}"
+
+  - title: smtp-user-enum - customized port and process count
+    desc: |
+      Execute a scan on a non-standard TCP port while adjusting the number of parallel processes for speed.
+      Increasing the process count (-m) makes the scan faster but significantly increases the risk of being rate-limited or blocked by a firewall.
+      Specifying a custom port is necessary when SMTP services are moved to ports like 587 or 2525 for obfuscation.
+      Always monitor the output for timeouts or "Connection Refused" errors when increasing concurrency.
+    command: "smtp-user-enum -p {{port|25}} -m {{processes|10}} -U {{user_file}} -t {{target}}"
+
+  - title: smtp-user-enum - verbose debugging scan
+    desc: |
+      Run the enumeration with verbose and debugging output enabled to see the raw SMTP responses.
+      This is critical when the tool provides unexpected results or if you suspect the server is providing false positives/negatives.
+      It reveals the exact response codes (like 250, 550, or 451) returned by the remote SMTP server.
+      Use this to troubleshoot connectivity issues or to understand how a specific server's security settings are behaving.
+    command: "smtp-user-enum -v -d -u {{username}} -t {{target}}"

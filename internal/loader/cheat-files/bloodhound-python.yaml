@@ -74,4 +74,4 @@ actions:
       Increases the number of worker threads to speed up the enumeration process in large environments. 
       The --zip flag automatically packages all generated JSON files into a single compressed archive for easy download. 
       Adding an output prefix helps distinguish between results from different domains or different phases of a test.
-    command: "bloodhound-python -u {{username}} -p {{password}} -d {{domain}}  -w {workers|20} --zip -op {{prefix_name}} "
+    command: "bloodhound-python -u {{username}} -p {{password}} -d {{domain}}  -w {{workers|20}} --zip -op {{prefix_name}} "

@@ -34,7 +34,7 @@ actions:
       This technique is vital for finding internal or hidden subdomains that don't have public DNS records.
       Since most servers return a default page for invalid hosts, you should combine this with filtering (like -fs) to remove noise.
       It helps in identifying development, staging, or administrative interfaces hosted on the same infrastructure.
-    command: "ffuf -u http://{{target_ip}} -H \"Host: FUZZ.{domain}\" -w {{wordlist}}"
+    command: "ffuf -u http://{{target_ip}} -H \"Host: FUZZ.{{domain}}\" -w {{wordlist}}"
 
   # === PARAMETER AND DATA FUZZING ===
   - title: ffuf - GET parameter fuzzing

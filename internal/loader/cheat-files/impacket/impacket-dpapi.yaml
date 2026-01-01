@@ -17,7 +17,7 @@ actions:
  - title: impacket-dpapi - decrypt masterkey with user password
    desc: |
      Decrypts a DPAPI MasterKey file using the user's cleartext password and their Security Identifier (SID).
-     MasterKey files are typically located in the user's profile directory under AppData\Roaming\Microsoft\Protect\{SID}.
+     MasterKey files are typically located in the user's profile directory under AppData\Roaming\Microsoft\Protect\(SID).
      Successful decryption yields the 'key' needed to unlock specific credentials, browser data, or WiFi passwords.
      This is the most common method used when you have successfully phished or recovered a user's password.
    command: "impacket-dpapi masterkey -file {{masterkey_path}} -sid {{user_sid}} -password {{password}}"
