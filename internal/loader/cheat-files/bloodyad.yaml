@@ -53,7 +53,7 @@ actions:
      Searches the directory for objects that match a specific LDAP filter.
      This is highly versatile for finding users with specific properties, such as those with 'ServicePrincipalName' set.
      It allows for custom reconnaissance tailored to specific attack vectors like Kerberoasting or AS-REP Roasting.
-   command: "bloodyAD -d {{domain}} -u {{username}} -p {{password}} --host {{dc_ip}} get search '{filter|(objectCategory=person)}'"
+   command: "bloodyAD -d {{domain}} -u {{username}} -p {{password}} --host {{dc_ip}} get search '{{filter|(objectCategory=person)}}'"
 
 # === PRIVILEGE ESCALATION & MODIFICATION (SET/ADD) ===
 

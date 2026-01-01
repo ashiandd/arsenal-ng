@@ -30,7 +30,7 @@ actions:
       Discovers subdomains by fuzzing the Host header in the HTTP request.
       This technique is effective for finding virtual hosts that are not indexed by DNS but exist on the server.
       Note that you should often filter out the default response size (chars/words) of the main domain to see valid subdomains.
-    command: "wfuzz -c -w {{wordlist|/usr/share/wordlists/dnsutils/subdomains-top1mil.txt}} -H \"Host: FUZZ.{domain}\" {{url}}"
+    command: "wfuzz -c -w {{wordlist|/usr/share/wordlists/dnsutils/subdomains-top1mil.txt}} -H \"Host: FUZZ.{{domain}}\" {{url}}"
 
   - title: wfuzz - recursive directory discovery
     desc: |

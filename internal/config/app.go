@@ -8,7 +8,7 @@ package config
 // Application Metadata
 // =============================================================================
 
-var Version = "0.4"
+var Version = "0.5"
 
 // Application info
 const (
