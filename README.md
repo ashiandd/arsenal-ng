@@ -3,7 +3,10 @@
 <p align="center">
   <img src="https://img.shields.io/badge/Go-1.24.0+-00ADD8?style=flat&logo=go" alt="Go Version">
   <img src="https://img.shields.io/badge/Platform-Linux%20%7C%20macOS-lightgrey" alt="Platform">
-  <img src="https://img.shields.io/badge/License-MIT-yellow?style=flat" alt="License">
+  <img src="https://img.shields.io/github/license/halilkirazkaya/arsenal-ng?color=yellow" alt="License">
+  <br>
+  <img src="https://img.shields.io/badge/Tools-194-blueviolet?style=flat&logo=linux&logoColor=white" alt="Tools Count">
+  <img src="https://img.shields.io/badge/Commands-2359-ff69b4?style=flat&logo=gnubash&logoColor=white" alt="Commands Count">
 </p>
 
 <p align="center">
@@ -46,7 +49,7 @@ make build
 |----------|--------|-------|
 | **Linux** | ✅ Fully Supported | Requires kernel 6.2+ configuration for terminal prefill (see [Troubleshooting](#-troubleshooting)) |
 | **macOS** | ✅ Fully Supported | Works out of the box, no additional configuration needed |
-| **Windows** | ❌ Not Supported | Terminal integration requires Unix-like systems |
+| **Windows** | ⚠️ WSL Only | Native (CMD/PowerShell) is **unsupported**. Use via **WSL**. |
 
 ---
 
