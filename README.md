@@ -46,7 +46,7 @@ make build
 |----------|--------|-------|
 | **Linux** | ✅ Fully Supported | Requires kernel 6.2+ configuration for terminal prefill (see [Troubleshooting](#-troubleshooting)) |
 | **macOS** | ✅ Fully Supported | Works out of the box, no additional configuration needed |
-| **Windows** | ❌ Not Supported | Terminal integration requires Unix-like systems |
+| **Windows** | ⚠️ WSL Only | Native (CMD/PowerShell) is **unsupported**. Use via **WSL**. |
 
 ---
 
